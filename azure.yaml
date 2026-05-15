@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
+
+name: pp-lernhelfer
+metadata:
+  template: pp-lernhelfer@1.0.0
+services:
+  webapp:
+    project: ./src/webapp
+    language: docker
+    host: containerapp
+    docker:
+      path: ./Dockerfile
+      context: .

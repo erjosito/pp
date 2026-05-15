@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="description" content="Karteikarten + Zusammenfassungen für Pädagogik & Psychologie (FOS Bayern, 12. Klasse)" />
+  <title>Pädagogik & Psychologie – Lernhelfer</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📚%3C/text%3E%3C/svg%3E" />
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <h1>📚 P&P Lernhelfer</h1>
+      <p class="subtitle">FOS Bayern · 12. Klasse · Sozialwesen</p>
+    </div>
+    <nav class="tabs">
+      <button class="tab active" data-view="cards">🎴 Karteikarten</button>
+      <button class="tab" data-view="summaries">📖 Zusammenfassungen</button>
+      <button class="tab" data-view="about">ℹ️ Tipps</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ============= FLASHCARDS VIEW ============= -->
+    <section id="view-cards" class="view active">
+      <div class="filter-bar">
+        <label for="topic-filter" class="filter-label">Themen filtern:</label>
+        <div id="topic-filter" class="topic-filter"></div>
+      </div>
+
+      <div class="card-stage">
+        <div id="flashcard" class="flashcard" tabindex="0" role="button" aria-label="Karte umdrehen">
+          <div class="flashcard-inner">
+            <div class="flashcard-face flashcard-front">
+              <div class="card-topic" id="card-topic-front">Lade...</div>
+              <div class="card-subtopic" id="card-subtopic-front"></div>
+              <div class="card-question" id="card-question">Klicke zum Starten</div>
+              <div class="card-hint">👆 Klicken zum Umdrehen</div>
+            </div>
+            <div class="flashcard-face flashcard-back">
+              <div class="card-topic" id="card-topic-back"></div>
+              <div class="card-subtopic" id="card-subtopic-back"></div>
+              <div class="card-answer" id="card-answer"></div>
+              <div class="card-hint">👆 Klicken zum Umdrehen</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button id="btn-prev" class="btn btn-secondary" title="Vorherige Karte">⬅ Zurück</button>
+        <button id="btn-shuffle" class="btn btn-primary" title="Karten neu mischen">🔀 Mischen</button>
+        <button id="btn-next" class="btn btn-secondary" title="Nächste Karte">Weiter ➡</button>
+      </div>
+
+      <div class="progress">
+        <span id="progress-text">Karte 0 / 0</span>
+        <div class="progress-bar"><div id="progress-fill" class="progress-fill"></div></div>
+      </div>
+    </section>
+
+    <!-- ============= SUMMARIES VIEW ============= -->
+    <section id="view-summaries" class="view">
+      <div class="summary-layout">
+        <aside class="summary-toc">
+          <h3>📂 Kapitel</h3>
+          <ul id="summary-list"></ul>
+        </aside>
+        <article id="summary-content" class="summary-content markdown-body">
+          <div class="placeholder">
+            <h2>📖 Wähle ein Kapitel</h2>
+            <p>Klicke links auf ein Kapitel, um die ausführliche Zusammenfassung zu lesen.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============= ABOUT / TIPS VIEW ============= -->
+    <section id="view-about" class="view">
+      <div class="about-content">
+        <h2>💡 Lerntipps für die Prüfung</h2>
+
+        <div class="tip-card">
+          <h3>🎯 Aktives Abrufen (Active Recall)</h3>
+          <p>Versuche, die Antwort zu nennen, BEVOR du die Karte umdrehst. Das ist 10× effektiver als nur lesen!</p>
+        </div>
+
+        <div class="tip-card">
+          <h3>🔁 Verteiltes Lernen (Spaced Repetition)</h3>
+          <p>Lieber 3× 20 Minuten an verschiedenen Tagen als 1× 60 Minuten. Schlaf konsolidiert das Gelernte.</p>
+        </div>
+
+        <div class="tip-card">
+          <h3>🔗 Vernetzen statt Isolieren</h3>
+          <p>Frage dich bei jeder Theorie: Wann entstand sie? Was kam davor/danach? Wie hängt sie mit anderen zusammen? → Siehe Kapitel 01 und 08.</p>
+        </div>
+
+        <div class="tip-card">
+          <h3>📝 In Fallbeispielen punkten</h3>
+          <ul>
+            <li>Theoretiker IMMER namentlich nennen ("nach Rogers...", "laut Bandura...")</li>
+            <li>Fachbegriffe verwenden ("negative Verstärkung" statt "Strafe")</li>
+            <li>Theorie auf konkrete Personen im Fall anwenden</li>
+            <li>2-3 Theorien kombinieren für mehr Tiefe</li>
+            <li>Am Schluss IMMER pädagogische Konsequenz aufzeigen</li>
+          </ul>
+        </div>
+
+        <div class="tip-card">
+          <h3>⚠️ Häufige Fehler vermeiden</h3>
+          <ul>
+            <li><strong>Antiautoritär ≠ Laissez-faire!</strong> Antiautoritär = bewusste pädagogische Haltung mit emotionaler Präsenz. Laissez-faire = Gleichgültigkeit.</li>
+            <li><strong>"Negative Verstärkung" ≠ Strafe!</strong> Negativ = etwas wird ENTZOGEN, nicht "schlimm".</li>
+            <li><strong>Big Five erklärt nicht WARUM</strong> jemand so ist – nur WIE er ist (rein deskriptiv).</li>
+          </ul>
+        </div>
+
+        <div class="tip-card highlight">
+          <h3>🍀 Vor der Prüfung</h3>
+          <ul>
+            <li>Sonntag: ALLES nochmal durchgehen, dann <strong>vor 22:00 ins Bett</strong></li>
+            <li>Montag früh: NUR Wiederholung, KEIN neuer Stoff</li>
+            <li>Tief durchatmen, gut frühstücken</li>
+            <li>In der Klausur: erst alle Aufgaben durchlesen, Zeit einteilen</li>
+            <li>Bei Blackout: nächste Aufgabe machen, später zurück</li>
+          </ul>
+        </div>
+
+        <p class="footer-note">Erstellt mit ❤️ für eine erfolgreiche Prüfungsvorbereitung. Du schaffst das! 💪</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Markdown rendering library (small, vendored) -->
+  <script src="https://cdn.jsdelivr.net/npm/marked@12.0.0/marked.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

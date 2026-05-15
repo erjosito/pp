@@ -1,0 +1,30 @@
+# ===== Azure Developer CLI =====
+.azure/*
+!.azure/plan.md
+
+# ===== OS / Editor =====
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# ===== Build artifacts =====
+node_modules/
+dist/
+build/
+*.log
+
+# ===== Secrets =====
+*.env
+.env
+.env.*
+!.env.example
+*.pfx
+*.pem
+*.key
+
+# ===== Terraform (if added later) =====
+*.tfstate
+*.tfstate.*
+.terraform/
