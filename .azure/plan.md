@@ -1,6 +1,6 @@
 # Azure Deployment Plan
 
-> **Status:** Ready for Validation
+> **Status:** Deployed
 
 Generated: 2026-05-15
 
@@ -145,10 +145,14 @@ Generated: 2026-05-15
 - [ ] Update plan status to "Validated"
 
 ### Phase 4: Deployment
-- [ ] Invoke azure-deploy skill (`azd up`)
-- [ ] Deployment successful
-- [ ] Verify URL works in browser
-- [ ] Update plan status to "Deployed"
+- [x] Invoke azure-deploy skill (`azd up`)
+- [x] Deployment successful
+- [x] Verify URL works in browser
+- [x] Update plan status to "Deployed"
+
+### Live URL
+
+**🌐 https://ca-pp-webapp-buzazo.victoriousbeach-4a138dbf.westeurope.azurecontainerapps.io/**
 
 ---
 
@@ -188,10 +192,27 @@ Generated: 2026-05-15
 
 ## 10. Next Steps
 
-> Current: Awaiting plan approval
+> Current: Validated, ready for deployment
 
-1. User approves plan
-2. Build flashcards.json + web app files
-3. Generate Bicep + azure.yaml
-4. Initialize git + push to GitHub
-5. Validate, then deploy with `azd up`
+1. ✅ User approved plan
+2. ✅ Built flashcards.json + web app files
+3. ✅ Generated Bicep + azure.yaml
+4. ✅ Initialized git + pushed to GitHub
+5. ✅ Validated (see Section 7 below)
+6. ⏭️ Deploy with `azd up` via azure-deploy skill
+
+---
+
+## 7. Validation Proof
+
+| Check | Command | Result |
+|-------|---------|--------|
+| azd installed | `azd version` | ✅ 1.23.5 |
+| azd authenticated (via az cli) | `azd auth login --check-status` | ✅ jomore@MngEnvMCAP642473.onmicrosoft.com |
+| Environment created | `azd env new pp-prod --subscription ... --location westeurope` | ✅ pp-prod set as default |
+| Bicep syntax build | `az bicep build --file infra/main.bicep` | ✅ Success (1 harmless minLength warning on ACR name) |
+| Provision preview | `azd provision --preview --no-prompt` | ✅ 6 resources planned: RG, Log Analytics, App Insights, ACR, ACA Environment, Container App |
+| Packaging | `azd package --no-prompt` | ✅ webapp packaged in 11s |
+| Subscription confirmed | `azd env get-values` | ✅ a8fbd8e1-fb5a-4411-804a-4ac80929c93c |
+| Region confirmed | `azd env get-values` | ✅ westeurope |
+| GitHub push | `git push -u origin main` | ✅ Pushed to https://github.com/erjosito/pp |

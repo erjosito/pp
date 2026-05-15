@@ -60,6 +60,11 @@ Das deployt:
 - **Log Analytics + Application Insights** (Monitoring)
 - **User-Assigned Managed Identity** (Secret-freier Pull aus ACR)
 
+### 🚀 Live-Deployment
+
+Aktuell deployt unter:
+**<https://ca-pp-webapp-buzazo.victoriousbeach-4a138dbf.westeurope.azurecontainerapps.io/>**
+
 ## 📝 Themenbereiche
 
 Die Karten und Zusammenfassungen decken folgende Bereiche des bayerischen FOS-Lehrplans Pädagogik & Psychologie (Sozialwesen, 12. Klasse) ab:
