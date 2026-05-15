@@ -241,6 +241,7 @@
 
   async function loadSummary(idx) {
     const entry = SUMMARIES[idx];
+    if (!entry) return;
     const items = $$('#summary-list li');
     items.forEach((li, i) => li.classList.toggle('active', i === idx));
 
@@ -252,11 +253,36 @@
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const md = await res.text();
       content.innerHTML = marked.parse(md);
+      rewriteSummaryLinks(content);
       content.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } catch (err) {
       console.error('Failed to load summary:', err);
       content.innerHTML = `<div class="placeholder"><h2>❌ Fehler</h2><p>Datei konnte nicht geladen werden: ${entry.file}</p></div>`;
     }
+  }
+
+  // Convert <a href="./xx.md"> links rendered from markdown into in-app
+  // navigation that calls loadSummary() instead of letting the browser
+  // navigate to the raw .md file.
+  function rewriteSummaryLinks(container) {
+    const anchors = container.querySelectorAll('a[href]');
+    anchors.forEach(a => {
+      const raw = a.getAttribute('href') || '';
+      // Strip leading ./ and any query/fragment, then match against SUMMARIES
+      const cleaned = raw.replace(/^\.\//, '').split(/[?#]/)[0];
+      const idx = SUMMARIES.findIndex(s => s.file === cleaned);
+      if (idx >= 0) {
+        a.classList.add('summary-link');
+        a.addEventListener('click', (e) => {
+          e.preventDefault();
+          loadSummary(idx);
+        });
+      } else if (/^https?:\/\//i.test(raw)) {
+        // External link: open in a new tab for safety
+        a.setAttribute('target', '_blank');
+        a.setAttribute('rel', 'noopener noreferrer');
+      }
+    });
   }
 
   // ===== Start =====
